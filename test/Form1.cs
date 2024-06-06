@@ -48,7 +48,17 @@ namespace test
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            // tạo các biến tương ứng
+            string maSv = tbMSV.Text.Trim();
+            string tenSv = tbTen.Text.Trim();
+            string hoSv = tbHo.Text.Trim();
+            string nSinh = dtpNS.Text.Trim();
+            string gTinhNam;
+            string gTinhNu;
 
+            // kiểm tra xem các biến đó có rỗng hay ko
+
+            // đặt vào try-catch
         }
 
         private void cbKhoa_SelectedIndexChanged(object sender, EventArgs e)
