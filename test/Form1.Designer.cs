@@ -57,7 +57,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(241, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(383, 32);
+            this.label1.Size = new System.Drawing.Size(382, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "Chương Trình Quản Lý Sinh Viên";
             // 
@@ -151,7 +151,6 @@
             this.rbtnNam.Name = "rbtnNam";
             this.rbtnNam.Size = new System.Drawing.Size(59, 24);
             this.rbtnNam.TabIndex = 11;
-            this.rbtnNam.TabStop = true;
             this.rbtnNam.Text = "Nam";
             this.rbtnNam.UseVisualStyleBackColor = true;
             // 
@@ -162,7 +161,6 @@
             this.rbtnNu.Name = "rbtnNu";
             this.rbtnNu.Size = new System.Drawing.Size(47, 24);
             this.rbtnNu.TabIndex = 12;
-            this.rbtnNu.TabStop = true;
             this.rbtnNu.Text = "Nữ";
             this.rbtnNu.UseVisualStyleBackColor = true;
             // 

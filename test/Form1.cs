@@ -52,13 +52,53 @@ namespace test
             string maSv = tbMSV.Text.Trim();
             string tenSv = tbTen.Text.Trim();
             string hoSv = tbHo.Text.Trim();
-            string nSinh = dtpNS.Text.Trim();
-            string gTinhNam;
-            string gTinhNu;
+            DateTime nSinh = dtpNS.Value;
+            string mKhoa = cbKhoa.Text.Trim();
+            string gioiTinh = rbtnNam.Checked ? "Nam" : (rbtnNu.Checked ? "Nữ" : null);
 
             // kiểm tra xem các biến đó có rỗng hay ko
+            if (string.IsNullOrEmpty(maSv) || string.IsNullOrEmpty(tenSv) || string.IsNullOrEmpty(hoSv) || string.IsNullOrEmpty(mKhoa) || gioiTinh == null)
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            } 
 
             // đặt vào try-catch
+            try
+            {
+                // Thêm mới 1 kết nối
+                using(conn = new SqlConnection(connectString))
+                {
+                    conn.Open();
+                    // Tạo câu lệnh sql thêm
+                    string sql = "INSERT INTO SINHVIEN ([Mã SV], [Họ SV], [Tên SV], [Ngày sinh], [Giới tính],[Mã Khoa]) VALUES (@maSv, @hoSv, @tenSv, @nSinh, @gioiTinh, @mKhoa)";
+
+                    // Kết nối câu lệnh sql với chuỗi kết nối
+                    using(cmd = new SqlCommand(sql, conn))
+                    {
+                        // Thêm biến tương ứng
+                        cmd.Parameters.Add("@maSv", SqlDbType.NVarChar).Value = maSv;
+                        cmd.Parameters.Add("@hoSv", SqlDbType.NVarChar).Value = hoSv;
+                        cmd.Parameters.Add("@tenSv", SqlDbType.NVarChar).Value = tenSv;
+                        cmd.Parameters.Add("@nSinh", SqlDbType.Date).Value = nSinh;
+                        cmd.Parameters.Add("@gioiTinh", SqlDbType.NVarChar).Value = gioiTinh;
+                        cmd.Parameters.Add("@mKhoa", SqlDbType.NVarChar).Value = mKhoa;
+
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Thêm mới sinh viên thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            rf();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Lỗi: " + ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+            }
         }
 
         private void cbKhoa_SelectedIndexChanged(object sender, EventArgs e)
